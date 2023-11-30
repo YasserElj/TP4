@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "yasserelj/tp4"
+registry = "yasserelj/tp4-3"
 registryCredential = 'dockerhub'
 dockerImage = ''
 }
@@ -40,5 +40,10 @@ dockerImage.push()
 }
 }
 }
+stage('Deploy image') {
+      steps{
+        bat "docker run -d -p 9090:80 $registry:$BUILD_NUMBER"
+      }
+    }
 }
 }
